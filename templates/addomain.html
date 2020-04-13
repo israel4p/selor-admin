@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="columns">
+    <div class="column is-4"></div>
+    <div class="column is-4">
+        <article class="message is-dark">
+            <div class="message-body">
+                <div class="title has-text-centered">Criar Domínio</div>
+                <hr>
+
+                <form name="domains" action="" method="post">
+                    <div class="field">
+                        <div class="control">
+                            {% if form.company.errors %}
+                                {% set class_company = 'input is-danger' %}
+                            {% else %}
+                                {% set class_company = 'input' %}
+                            {% endif %}
+                            {{ form.company(class_=class_company) }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {% if form.domain.errors %}
+                                {% set class_domain = 'input is-danger' %}
+                            {% else %}
+                                {% set class_domain = 'input' %}
+                            {% endif %}
+                            {{ form.domain(class_=class_domain) }}
+                        </div>
+                    </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                                {% for class, message in messages %}
+                                <div class="{{ class }}">
+                                    <button type="button" class="delete"></button>
+                                    {{ message }}
+                                </div>
+                                {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <button class="button is-info submit">
+                        <i class="fa fa-plus">&nbsp;</i>
+                        Salvar
+                    </button>
+                </form>
+
+            </div>
+        </article>
+
+    </div>
+    <div class="column is-4"></div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column is-4"></div>
+        <div class="column is-4">
+            <article class="message is-dark">
+                <div class="message-body">
+                    <div class="title has-text-centered">Editar Senha</div>
+                    <hr>
+                    <form name="admin" action="" method="post">
+                        <div class="field">
+                            <div class="control">
+                                {% if form.atual.errors %}
+                                {% set class_atual = 'input is-danger' %}
+                                {% else %}
+                                {% set class_atual = 'input' %}
+                                {% endif %}
+
+                                {{ form.atual(class_=class_atual) }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                {% if form.nova.errors %}
+                                {% set class_nova = 'input is-danger' %}
+                                {% else %}
+                                {% set class_nova = 'input' %}
+                                {% endif %}
+
+                                {{ form.nova(class_=class_nova) }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                {% if form.repetir.errors %}
+                                {% set class_repetir = 'input is-danger' %}
+                                {% else %}
+                                {% set class_repetir = 'input' %}
+                                {% endif %}
+
+                                {{ form.repetir(class_=class_repetir) }}
+                            </div>
+                        </div>
+                        <hr>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                    {% for class, message in messages %}
+                                    <div class="{{ class }}">
+                                        <button type="button" class="delete"></button>
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <button type="submit" class="button is-info">Atualizar</button>
+                    </form>
+                </div>
+            </article>
+        </div>
+        <div class="column is-4"></div>
+    </div>
+{% endblock %}

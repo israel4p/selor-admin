@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>MTA Selor Admin</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lib/bulma.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lib/font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.min.css') }}">
+    </head>
+    <body>
+        <nav class="navbar is-expanded">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    MTA Selor Admin
+                </a>
+
+                <button class="button navbar-burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <a href="{{ url_for('usuarios') }}" class="navbar-item">Usuários</a>
+            <a href="{{ url_for('domains') }}" class="navbar-item is-right">Domínios</a>
+            <div class="navbar-end">
+                <a href="{{ url_for('admin') }}" class="navbar-item is-right">Admin</a>
+                <a href="{{ url_for('logout') }}" class="navbar-item is-right">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+                {% block content %} <!-- page content --> {% endblock %}
+        </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    </body>
+</html>

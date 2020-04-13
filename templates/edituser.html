@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column is-4"></div>
+        <div class="column is-4">
+            <form name="edituser" action="" method="post">
+                <article class="message is-dark">
+                    <div class="message-body">
+                        <div class="title has-text-centered">Editar E-Mail</div>
+                        <div class="subtitle has-text-centered">{{ user.mail }}</div>
+                        <hr>
+                        <div class="columns">
+                            <div class="column is-12">
+                                <div class="field">
+                                    <div class="control">
+                                        {% if form.name.errors %}
+                                            {% set class_name = 'input is-danger' %}
+                                        {% else %}
+                                            {% set class_name = 'input' %}
+                                        {% endif %}
+
+                                        {{ form.name(class_=class_name, value=user.name) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column is-5">
+                                <div class="field">
+                                    <div class="control">
+                                        {% if form.quota.errors %}
+                                            {% set class_quota = 'input is-danger' %}
+                                        {% else %}
+                                            {% set class_quota = 'input' %}
+                                        {% endif %}
+                                        {% set quota = user.quota|int / 1000 / 1000 %}
+
+                                        {{ form.quota(class_=class_quota, value=quota|int(-1)) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-7">
+                                <div class="field">
+                                    <div class="control">
+                                        {% if form.password.errors %}
+                                            {% set class_password = 'input is-danger' %}
+                                        {% else %}
+                                            {% set class_password = 'input' %}
+                                        {% endif %}
+
+                                        {{ form.password(class_=class_password) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                    {% for class, message in messages %}
+                                    <div class="{{ class }}">
+                                        <button type="button" class="delete"></button>
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <button type="submit" class="button is-info submit">
+                            <i class="fa fa-floppy-o">&nbsp;</i>
+                            Atualizar
+                        </button>
+                    </div>
+                </article>
+            </form>
+        </div>
+        <div class="column is-4"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if domain %}
+        <article class="message is-danger">
+            <div class="message-body">
+                <div class="columns">
+                    <div class="column is-8">
+                        <b>Deseja apagar o domínio:</b> {{ domain }} ?
+                    </div>
+                    <div class="column is-4">
+                        <div class="is-pulled-right">
+                            <a class="button is-danger" href="{{ url_for('domains', delete=domain) }}">Confirmar</a>
+                            <a class="button" href="{{ url_for('domains') }}">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+                {% for class, message in messages %}
+                <div class="notification is-success">
+                    <button type="button" class="delete"></button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<p class="field is-pulled-right">
+    <a class="button is-info" href="{{ url_for('addomain') }}">
+        <span class="icon">
+            <i class="fa fa-plus"></i>
+        </span>
+    </a>
+</p>
+
+{% if mydomains %}
+<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Domínio</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for mydomain in mydomains %}
+            <tr>
+                <td>{{mydomain.company }}</td>
+                <td>{{ mydomain.name }}</td>
+                <td>
+                    <p class="field is-pulled-right">
+                        <a class="button is-small is-danger" href="{{ url_for('domains', confirm=mydomain.name) }}">
+                            <span class="icon">
+                                <i class="fa fa-trash"></i>
+                            </span>
+                        </a>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

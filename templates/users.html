@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if email %}
+        <article class="message is-danger">
+            <div class="message-body">
+                <div class="columns">
+                    <div class="column is-8">
+                        <b>Deseja apagar o email:</b> {{ email }} ?
+                    </div>
+                    <div class="column is-4">
+                        <div class="is-pulled-right">
+                            <a class="button is-danger" href="{{ url_for('usuarios', delete=email) }}">Confirmar</a>
+                            <a class="button" href="{{ url_for('usuarios') }}">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+                {% for class, message in messages %}
+                <div class="notification is-success">
+                    <button type="button" class="delete"></button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <p class="field is-pulled-right">
+        <a class="button is-info" href="{{ url_for('adduser') }}">
+            <span class="icon">
+                <i class="fa fa-plus"></i>
+            </span>
+        </a>
+    </p>
+    {% if usuarios %}
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Quota</th>
+                <th>Data</th>
+                <th>Ativo</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.name }}</td>
+                    <td>{{ usuario.mail }}</td>
+                    {% set quota = usuario.quota|int / 1000 / 1000 %}
+                    <td>{{ quota|int(-1) }} Mb</td>
+                    <td>{{ usuario.date_add }}</td>
+                    {% if usuario.ok == 1 %}
+                        <td>Sim</td>
+                    {% else %}
+                        <td>Não</td>
+                    {% endif %}
+                    <td>
+                        <p class="field is-pulled-right">
+                            <a class="button is-small" href="{{ url_for('edituser', email=usuario.mail) }}">
+                                <span class="icon">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                            </a>
+
+                            <a class="button is-small is-danger" href="{{ url_for('usuarios', confirm=usuario.mail ) }}">
+                                <span class="icon">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </a>
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

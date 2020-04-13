@@ -1,0 +1,15 @@
+click==6.7
+configparser==3.5.0
+Flask==0.12.2
+Flask-ini==0.2.1
+Flask-Login==0.4.0
+Flask-SQLAlchemy==2.3.2
+Flask-WTF==0.14.2
+itsdangerous==0.24
+Jinja2==2.9.6
+MarkupSafe==1.0
+passlib==1.7.1
+PyMySQL==0.7.11
+SQLAlchemy==1.1.15
+Werkzeug==0.12.2
+WTForms==2.1
