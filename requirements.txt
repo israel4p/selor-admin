@@ -11,5 +11,5 @@ MarkupSafe==1.0
 passlib==1.7.1
 PyMySQL==0.7.11
 SQLAlchemy==1.1.15
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 WTForms==2.1
